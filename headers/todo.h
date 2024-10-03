@@ -7,6 +7,9 @@
 #include <gtkmm/box.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/frame.h>
+#include <gtkmm/text.h>
+#include <gtkmm/textview.h>
+#include "todo_title.h"
 
 class Todo : public Gtk::Window
 {
@@ -17,10 +20,16 @@ class Todo : public Gtk::Window
 
     protected:
 
+    // Signal handlers
+    void on_button_clicked(int menu_option);
+
+    // Other functions
+
     // Containers
     Gtk::Frame m_optionsFrame;
     Gtk::Grid m_optionsGrid;
     Gtk::Box m_mainBox;
+    Gtk::Box m_title_box;
 
     // Widgets
     Gtk::Button m_listButton;
@@ -30,6 +39,7 @@ class Todo : public Gtk::Window
     Gtk::Button m_eraseButton;
     Gtk::Button m_exitButton;
     Gtk::Entry m_entry;
+    Todo_Title m_title_area;
 
 };
 

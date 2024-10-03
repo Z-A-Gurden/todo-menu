@@ -1,4 +1,15 @@
+# Always ignore
 .vscode/
 obj/
 testfortodo.sh
 todo-menu
+todo-menu-mock.odg
+todo-menu.jpg
+todo.txt
+
+# Stop ignoring at a later implementation
+src/add_list.cpp
+headers/add_list.h
+src/error.cpp
+headers/error.h
+file.h
