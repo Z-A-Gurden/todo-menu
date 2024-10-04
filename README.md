@@ -1,10 +1,10 @@
 # todo-menu
 This is a todo list app made using gtk/gtkmm-4.0.
 This is simply a learning project and isn't for serious use.
-Currently todo is not functional and is just in a developmental stage
+Currently todo supports basic i/o, but formatting and features for an actual todo menu is missing, e.g the ability to check a goal.
 
 ## Dependencies
-GTK4 and gtkmm-4.0
+[gtk4](https://www.gtk.org/docs/installations/index) and [gtkmm-4.0](https://gtkmm.org/en/download.html).
 
 ## How to build
 simply type within the directory:
