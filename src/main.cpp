@@ -1,5 +1,5 @@
-#include "../headers/todo.h"
 #include <gtkmm/application.h>
+#include "../headers/todo.h"
 
 // creates application and runs it, then returns whether or not it was successful once closed
 int main(int argc, char* argv[])

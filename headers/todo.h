@@ -3,13 +3,13 @@
 
 #include <gtkmm/button.h>
 #include <gtkmm/window.h>
-#include <gtkmm/entry.h>
 #include <gtkmm/box.h>
 #include <gtkmm/grid.h>
 #include <gtkmm/frame.h>
-#include <gtkmm/text.h>
 #include <gtkmm/textview.h>
+#include <gtkmm/scrolledwindow.h>
 #include "todo_title.h"
+#include "file_view.h"
 
 class Todo : public Gtk::Window
 {
@@ -30,16 +30,14 @@ class Todo : public Gtk::Window
     Gtk::Grid m_optionsGrid;
     Gtk::Box m_mainBox;
     Gtk::Box m_title_box;
+    Gtk::ScrolledWindow m_file_scroller;
 
     // Widgets
-    Gtk::Button m_listButton;
-    Gtk::Button m_addButton;
-    Gtk::Button m_markButton;
-    Gtk::Button m_removeButton;
-    Gtk::Button m_eraseButton;
-    Gtk::Button m_exitButton;
-    Gtk::Entry m_entry;
-    Todo_Title m_title_area;
+    Gtk::Button m_save_list_button;
+    Gtk::Button m_erase_list_button;
+    Gtk::Button m_exit_button;
+    TodoTitle m_title_area;
+    TodoFile m_file_view;
 
 };
 
