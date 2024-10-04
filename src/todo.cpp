@@ -32,7 +32,7 @@ Todo::Todo()
     m_title_area.set_content_height(50);
 
     // create list preemptively
-    std::ofstream list{"todo.txt", std::ios::app};
+    //std::ofstream list{"todo.txt", std::ios::app};
     
     // Puts the text view into a scrollable widget
     m_file_scroller.set_child(m_file_view);
@@ -70,6 +70,7 @@ void Todo::on_button_clicked(int menu_option)
             m_file_view.save_buffer_into_file();
             break;
         case 2:
+            m_file_view.erase_list();
             break;
         case 3:
             close();

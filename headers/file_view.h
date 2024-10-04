@@ -14,6 +14,7 @@ class TodoFile : public Gtk::TextView
         bool get_error_flag(){return error_flag;}
         int save_buffer_into_file();
         int read_file_into_buffer();
+        int erase_list();
 
     private:
         Glib::RefPtr<Gtk::TextBuffer> m_buffer;

@@ -56,3 +56,18 @@ int TodoFile::save_buffer_into_file()
     out << m_buffer->get_text();
     return 0;
 }
+
+// Erase lisst defined here for consistency
+int TodoFile::erase_list()
+{
+    std::ofstream erase{dir / "todo.txt"};
+    if(!erase)
+    {
+        error(m_parent, FILE_FAILED_TO_OPEN);
+        return -1;
+    }
+    
+    m_buffer->set_text("");
+    erase.close();
+    return 0;
+}
