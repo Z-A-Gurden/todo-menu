@@ -10,6 +10,7 @@ class TodoFile : public Gtk::TextView
 {
     public:
         TodoFile(Todo& parent);
+        TodoFile(TodoFile& origin);
         ~TodoFile() override;
         bool get_error_flag(){return error_flag;}
         int save_buffer_into_file();

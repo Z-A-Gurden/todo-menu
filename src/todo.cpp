@@ -1,8 +1,8 @@
 #include <iostream>
-#include <gtkmm/application.h>
 #include <fstream>
+#include <gtkmm/application.h>
 #include "../headers/todo.h"
-#include "../headers/error.h"
+#include "../headers/dialog.h"
 
 // Constructor
 Todo::Todo()
@@ -54,26 +54,46 @@ Todo::Todo()
 Todo::~Todo()
 {}
 
+TodoFile& Todo::get_file(){ return m_file_view; }
+
 // Function that in the future will determine what happens when the buttons are pressed
 // It is not likely all the current buttons will exist, and will be replaced with methods less
 // similar to the similar todo cli, these buttons are clearly based on the cli as a placeholder
 void Todo::on_button_clicked(int menu_option)
 {   
+    /* if(menu_option == 1)
+    {
+        if(m_file_view.get_error_flag())
+        {
+            Dialog error(*this, INVALID_OPERATION);
+        }
+        m_file_view.save_buffer_into_file();
+    }
+    else if(menu_option == 2)
+    {
+        Dialog confirm(*this, CONFIRM_ERASE, m_file_view);
+    }
+    else close(); */
+    
     switch (menu_option) 
     {
         case 1:
             if(m_file_view.get_error_flag())
                 {
-                    error(*this, INVALID_OPERATION);
+                    Dialog error(*this, INVALID_OPERATION);
                     break;
                 }
             m_file_view.save_buffer_into_file();
             break;
         case 2:
-            m_file_view.erase_list();
+        {
+            //m_file_view.erase_list();
+            Dialog confirm(*this, CONFIRM_ERASE);
             break;
+        }
         case 3:
             close();
         default: break;
     }
+   
 }
