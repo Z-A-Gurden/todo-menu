@@ -92,7 +92,8 @@ void Todo::on_button_clicked(int menu_option)
             break;
         }
         case 3:
-            close();
+            {Dialog exit(*this, CONFIRM_EXIT);}
+            //close();
         default: break;
     }
    

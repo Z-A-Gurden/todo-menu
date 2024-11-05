@@ -72,16 +72,9 @@ int TodoFile::save_buffer_into_file()
 }
 
 // Erase list defined here for consistency
+// Removed previous file overwrite code as I feel that erase list should not erase until save list is used
 int TodoFile::erase_list()
 {
-    std::ofstream erase{dir / "todo.txt"};
-    if(!erase)
-    {
-        Dialog error(m_parent, FILE_FAILED_TO_OPEN);
-        return -1;
-    }
-    
     m_buffer->set_text("");
-    erase.close();
     return 0;
 }

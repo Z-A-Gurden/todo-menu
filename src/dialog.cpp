@@ -36,26 +36,54 @@ void Dialog::confirm(dia_signals signal)
             m_dialog->set_message("Erase List?");
             m_dialog->set_detail("You have clicked \"erase list\", press confirm to proceed or press cancel");
             m_dialog->set_buttons({"Confirm", "Cancel"});
-            m_dialog->set_default_button(0);
-            //m_dialog->set_cancel_button(1);
+            m_dialog->set_default_button(1);
+            m_dialog->set_cancel_button(1);
+            m_dialog->choose(m_parent, sigc::mem_fun(*this, &Dialog::on_button_press_erase));
             break;
         case CONFIRM_EXIT:
+            m_dialog->set_message("Exit?");
+            m_dialog->set_detail("You have chosen to exit without saving, do you wish to exit and save?");
+            m_dialog->set_buttons({"Save & Exit", "Exit", "Cancel"});
+            m_dialog->set_default_button(2);
+            m_dialog->set_cancel_button(2);
+            m_dialog->choose(m_parent, sigc::mem_fun(*this, &Dialog::on_button_press_exit));
             break;
     }
-    m_dialog->choose(m_parent, sigc::mem_fun(*this, &Dialog::on_button_press));
+    std::cout << "HI!\n";
 }
 
-void Dialog::on_button_press(const Glib::RefPtr<Gio::AsyncResult>& signal)
+void Dialog::on_button_press_erase(const Glib::RefPtr<Gio::AsyncResult>& signal)
 {
     const int id{m_dialog->choose_finish(signal)};
         switch(id)
         {
-            /* case 0:
+            case 0:
                 m_file->erase_list();
-                break; */
+                break;
+            case 1:
+                std::cerr << "Cancel selected\n Aborting erasure!\n";
+                break;
             default:
-                std::cout << "Unexpected Result!\n";
-                m_file->erase_list();
+                std::cerr << "Unexpected Result!\n Aborting erasure!\n";
         }
 }
+
+void Dialog::on_button_press_exit(const Glib::RefPtr<Gio::AsyncResult>& signal)
+{
+    const int id{m_dialog->choose_finish(signal)};
+    std::cerr << "hi\n";
+    switch(id)
+    {
+        case 0:
+            m_file->save_buffer_into_file();
+            close(0);
+            break;
+        case 1:
+            close(0);
+        default:
+            std::cout << "Canceled exit!\n";
+    }
+
+}
+
 
