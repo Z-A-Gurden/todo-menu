@@ -61,10 +61,10 @@ int TodoFile::save_buffer_into_file()
         return -1;
     
     }
-    std::regex pattern{"[0-9]. "};
+    // updated from old regex pattern, replacement of numbers mid line SEEMS to be fixed.
+    std::regex pattern{"^[0-9].[[:space:]]", std::regex_constants::multiline};
     std::string temp{m_buffer->get_text()};
-    std::string replace{""};
-    std::string result{std::regex_replace(temp, pattern, replace)};
+    std::string result{std::regex_replace(temp, pattern, "")};
     out << result;
 
     return 0;
