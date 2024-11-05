@@ -17,8 +17,8 @@ TodoFile::TodoFile(Todo& parent)
 TodoFile::TodoFile(TodoFile& origin)
 : m_buffer{origin.m_buffer}, m_parent{origin.m_parent}
 {
-    //error_flag = read_file_into_buffer();
-    //set_buffer(m_buffer);
+    error_flag = read_file_into_buffer();
+    set_buffer(m_buffer);
 }
 
 TodoFile::~TodoFile()
@@ -42,7 +42,6 @@ int TodoFile::read_file_into_buffer()
     while(getline(in, line))
     {
         file += std::to_string(line_num) + ". " + line + '\n';
-        //file += line + '\n';
         line_num++;
     }
     m_buffer->set_text(file);
@@ -72,7 +71,7 @@ int TodoFile::save_buffer_into_file()
 }
 
 // Erase list defined here for consistency
-// Removed previous file overwrite code as I feel that erase list should not erase until save list is used
+// Removed previous file overwrite code as I feel that erase list should not erase until save list is used or future confirm dialog upon exit
 int TodoFile::erase_list()
 {
     m_buffer->set_text("");
