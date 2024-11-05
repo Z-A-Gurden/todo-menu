@@ -1,8 +1,8 @@
 #include <iostream>
-#include <gtkmm/application.h>
 #include <fstream>
+#include <gtkmm/application.h>
 #include "../headers/todo.h"
-#include "../headers/error.h"
+#include "../headers/dialog.h"
 
 // Constructor
 Todo::Todo()
@@ -31,15 +31,12 @@ Todo::Todo()
     m_title_area.set_hexpand(true);
     m_title_area.set_content_height(50);
 
-    // create list preemptively
-    //std::ofstream list{"todo.txt", std::ios::app};
     
     // Puts the text view into a scrollable widget
     m_file_scroller.set_child(m_file_view);
     m_file_scroller.set_size_request(width, height);
 
-    // It is not likely all the current buttons will exist, and will be replaced with methods less
-    // similar to the similar todo cli, these buttons are clearly based on the cli as a placeholder
+    // The buttons for use in the main menu, offering basic functions
     m_optionsFrame.set_child(m_optionsGrid);
     m_optionsGrid.attach(m_save_list_button, 0, 0);
     m_optionsGrid.attach(m_erase_list_button, 1, 0);
@@ -54,9 +51,9 @@ Todo::Todo()
 Todo::~Todo()
 {}
 
-// Function that in the future will determine what happens when the buttons are pressed
-// It is not likely all the current buttons will exist, and will be replaced with methods less
-// similar to the similar todo cli, these buttons are clearly based on the cli as a placeholder
+TodoFile& Todo::get_file(){ return m_file_view; }
+
+// Callback that matches button pressed in main menu to the desired output. This is also the delivery system for error and planned confirm dialogs
 void Todo::on_button_clicked(int menu_option)
 {   
     switch (menu_option) 
@@ -64,16 +61,22 @@ void Todo::on_button_clicked(int menu_option)
         case 1:
             if(m_file_view.get_error_flag())
                 {
-                    error(*this, INVALID_OPERATION);
+                    Dialog error(*this, INVALID_OPERATION);
                     break;
                 }
             m_file_view.save_buffer_into_file();
             break;
         case 2:
+        {
             m_file_view.erase_list();
             break;
+        }
         case 3:
             close();
-        default: break;
+            break;
+        default:
+            std::cerr << "Invalid option picked!\n";
+             break;
     }
+   
 }

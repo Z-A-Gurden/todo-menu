@@ -17,6 +17,7 @@ class Todo : public Gtk::Window
     public:
     Todo();
     ~Todo() override;
+    TodoFile& get_file();
 
     protected:
 
